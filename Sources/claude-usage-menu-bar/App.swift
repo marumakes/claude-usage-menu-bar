@@ -12,7 +12,7 @@ struct claude_usage_menu_bar: App {
         MenuBarExtra {
             MenuBarView(store: store)
         } label: {
-            Text("CC: \(store.usage.sessionPercentage)%")
+            Text(store.isLoading ? "CC: …" : "CC: \(store.usage.sessionPercentage)%")
                 .task {
                     while !Task.isCancelled {
                         store.refresh()

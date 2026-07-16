@@ -10,6 +10,21 @@ enum ClaudeError: Error {
     case unknown
 }
 
+extension ClaudeError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .invalidData: return "Couldn't read output from the Claude CLI."
+        case .missingLine(let line): return "Couldn't find \"\(line)\" in the usage output."
+        case .invalidPercentage: return "Couldn't parse a usage percentage."
+        case .invalidDate: return "Couldn't parse a reset date."
+        case .processFailed: return "The Claude CLI process failed to run."
+        case .commandNotFound: return "Claude CLI not found."
+        case .unknown: return "Something went wrong."
+        }
+    }
+}
+
+
 // runs a terminal command to access to the Claude CLI, and returns the usage data
 func runClaudeUsage() throws -> String {
     // create process

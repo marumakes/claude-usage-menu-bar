@@ -4,9 +4,9 @@ import Observation
 @Observable
 class UsageStore {
     private(set) var usage: Usage
+    private(set) var isLoading = true
+    private(set) var errorMessage: String?
 
-
-    // TODO: change to "Loading" instead of initial state
     init() {
         usage = Usage(sessionPercentage: 0, weeklyPercentage: 0, sessionResetDate: nil, weeklyResetDate: nil, lastUpdated: Date())
     }
@@ -15,9 +15,12 @@ class UsageStore {
         do {
             let output = try runClaudeUsage()
             usage = try parseUsage(from: output)
+            errorMessage = nil
+            isLoading = false
         }
         catch {
-            print(error)
+            errorMessage = error.localizedDescription
         }
+        isLoading = false
     }
 }
