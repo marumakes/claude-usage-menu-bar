@@ -2,6 +2,9 @@ import Foundation
 
 enum ClaudeError: Error {
     case invalidData
+    case missingLine(String)
+    case invalidPercentage
+    case invalidDate
     case processFailed
     case commandNotFound
     case unknown
