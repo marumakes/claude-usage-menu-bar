@@ -7,7 +7,7 @@ struct MenuBarView: View {
     var body: some View {
         VStack (alignment: .leading) {
             if store.isLoading {
-                Text("Loading...")
+                LoadingDotsView()
             } else {
                 Text("Current session: \(store.usage.sessionPercentage)%")
                 if let sessionResetDate = store.usage.sessionResetDate {
@@ -25,14 +25,14 @@ struct MenuBarView: View {
                 }
 
                 if let errorMessage = store.errorMessage {
-                    Text(errorMessage).foregroundStyle(.red).foregroundStyle(.secondary)
+                    Text(errorMessage).foregroundStyle(.red)
                 }
 
                 Divider()
                 
                 HStack{
                     Button("Refresh") {
-                        store.refresh()
+                        Task { await store.refresh() }
                     } 
 
                     Button("Quit") {
@@ -43,6 +43,6 @@ struct MenuBarView: View {
             }
         }
         .padding(8)
-        .frame(maxWidth: 220)
+        .frame(maxWidth: 220, minHeight: 150)
     }
 }
