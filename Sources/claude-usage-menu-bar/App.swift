@@ -19,6 +19,6 @@ struct claude_usage_menu_bar: App {
                         try? await Task.sleep(for: .seconds(300))
                     }
                 }
-        }
+        }.menuBarExtraStyle(.window)
     }
 }
