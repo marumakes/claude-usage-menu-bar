@@ -19,7 +19,7 @@ This app displays a user's Claude Code session usage on the Mac menu bar, and wh
 ## Installation
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/marumakes/claude-usage-menu-bar.git
 cd claude-usage-menu-bar
 swift build
 swift run
